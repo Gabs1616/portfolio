@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #060606; }
+    a { color: {{ accentColor }}; text-decoration: underline; }
+    a:hover { color: #ffffff; }
+    .justify-pt { text-align: justify; hyphens: auto; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="image-slot" from="./image-slot.js" hint-size="0,0" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none"></x-import>
+
+<div aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0">
+  <span style="font-family:'Poppins',sans-serif;font-weight:400">áàâãéêíóôõúüçÁÀÂÃÉÊÍÓÔÕÚÜÇ</span>
+  <span style="font-family:'Poppins',sans-serif;font-weight:500">áàâãéêíóôõúüçÁÀÂÃÉÊÍÓÔÕÚÜÇ</span>
+  <span style="font-family:'Poppins',sans-serif;font-weight:600">áàâãéêíóôõúüçÁÀÂÃÉÊÍÓÔÕÚÜÇ</span>
+  <span style="font-family:'Poppins',sans-serif;font-weight:700">áàâãéêíóôõúüçÁÀÂÃÉÊÍÓÔÕÚÜÇ</span>
+</div>
+<div style="background:#060606;width:100%;font-family:'Poppins',sans-serif;color:#F4F4F4;overflow-x:hidden;position:relative">
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.92);display:{{ lightboxDisplay }};align-items:center;justify-content:center;flex-direction:column;gap:16px">
+      <button onClick="{{ closeLightbox }}" style="position:absolute;top:24px;right:32px;background:transparent;border:none;color:#F4F4F4;font-size:32px;line-height:1;cursor:pointer">×</button>
+      <button onClick="{{ prevLightbox }}" style="position:absolute;left:24px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:48px;height:48px;color:#F4F4F4;font-size:22px;cursor:pointer">‹</button>
+      <button onClick="{{ nextLightbox }}" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:48px;height:48px;color:#F4F4F4;font-size:22px;cursor:pointer">›</button>
+      <sc-if value="{{ lbFlags.p01c_0 }}"><img onClick="{{ stopProp }}" src="assets/expobor-linkedin-abiarb.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01c_1 }}"><img onClick="{{ stopProp }}" src="assets/expobor-palestra-gabriel.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01c_2 }}"><img onClick="{{ stopProp }}" src="assets/convite-vip-1.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01c_3 }}"><img onClick="{{ stopProp }}" src="assets/pneushow-linkedin-aresp.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01c_4 }}"><img onClick="{{ stopProp }}" src="assets/palestra-ricca.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01c_5 }}"><img onClick="{{ stopProp }}" src="assets/convite-vip-2.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_0 }}"><img onClick="{{ stopProp }}" src="assets/lona-interna.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_1 }}"><img onClick="{{ stopProp }}" src="assets/header-reuniao-presidencia.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_2 }}"><img onClick="{{ stopProp }}" src="assets/linkedin-abiarb.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_3 }}"><img onClick="{{ stopProp }}" src="assets/header-reuniao-abrafiltros.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_4 }}"><img onClick="{{ stopProp }}" src="assets/info086-face-insta.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01e_5 }}"><img onClick="{{ stopProp }}" src="assets/header.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01f_0 }}"><img onClick="{{ stopProp }}" src="assets/abiarbconecta-contraste-cores.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#ffffff"></sc-if>
+      <sc-if value="{{ lbFlags.p01f_1 }}"><img onClick="{{ stopProp }}" src="assets/abiarbconecta-monocromatico.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#ffffff"></sc-if>
+      <sc-if value="{{ lbFlags.p01f_2 }}"><img onClick="{{ stopProp }}" src="assets/abiarbconecta-area-protecao.png" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#ffffff"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_0 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-consciencia-negra.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_1 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-lavanda.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_2 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-5-beneficios.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_3 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-bem-estar.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_4 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-bingo.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <sc-if value="{{ lbFlags.p01d_5 }}"><img onClick="{{ stopProp }}" src="assets/bagnare-proclamacao.jpg" alt="{{ lightboxAlt }}" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.6)"></sc-if>
+      <div style="color:#FFFFFF;font-size:13px">{{ lightboxCounter }}</div>
+    </div>
+  </sc-if>
+
+<!-- SIDE RAIL -->
+  <div onMouseEnter="{{ openRail }}" onMouseLeave="{{ closeRail }}" style="position:fixed;left:24px;top:80px;z-index:40;opacity:{{ railVisible }};pointer-events:{{ railPointerEvents }};transition:opacity 0.25s ease">
+    <div style="cursor:default;padding:8px 14px;background:rgba(15,15,15,0.9);border:1px solid rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;gap:8px;width:fit-content">
+      <span style="display:flex;gap:3px">
+        <span style="display:block;width:2px;height:12px;background:{{ accentColor }}"></span>
+        <span style="display:block;width:2px;height:9px;background:{{ accentColor }};align-self:flex-end"></span>
+        <span style="display:block;width:2px;height:12px;background:{{ accentColor }}"></span>
+      </span>
+      <span style="color:#FFFFFF;font-size:11px;letter-spacing:0.05em;white-space:nowrap">Índice</span>
+    </div>
+    <div style="height:{{ railHeight }};overflow:hidden;transition:height 0.2s ease">
+      <div style="width:230px;padding:18px 16px;margin-top:6px;background:rgba(15,15,15,0.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:8px">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <a onClick="{{ scrollToAbout }}" style="cursor:pointer;color:{{ railAboutColor }};font-weight:700;font-size:13px;text-decoration:none;padding:6px 0">Sobre meu trabalho / Trajetória</a>
+
+          <a onClick="{{ scrollToCorp }}" style="cursor:pointer;color:{{ railCorpColor }};font-weight:700;font-size:13px;text-decoration:none;padding:10px 0 4px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1)">Projetos Corporativos</a>
+          <a onClick="{{ scrollToProj01a }}" style="cursor:pointer;color:{{ railColors.proj01a }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-A · CRM e Segmentação</a>
+          <a onClick="{{ scrollToProj01b }}" style="cursor:pointer;color:{{ railColors.proj01b }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-B · Campanha B2B</a>
+          <a onClick="{{ scrollToProj01c }}" style="cursor:pointer;color:{{ railColors.proj01c }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-C · Expobor &amp; Pneushow</a>
+          <a onClick="{{ scrollToProj01d }}" style="cursor:pointer;color:{{ railColors.proj01d }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-D · Bagnare Cosméticos</a>
+          <a onClick="{{ scrollToProj01e }}" style="cursor:pointer;color:{{ railColors.proj01e }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-E · Peças institucionais</a>
+          <a onClick="{{ scrollToProj01f }}" style="cursor:pointer;color:{{ railColors.proj01f }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">01-F · Identidade AbiarbConecta</a>
+
+          <a onClick="{{ scrollToAcad }}" style="cursor:pointer;color:{{ railAcadColor }};font-weight:700;font-size:13px;text-decoration:none;padding:10px 0 4px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1)">Projetos Acadêmicos</a>
+          <a onClick="{{ scrollToProj02a }}" style="cursor:pointer;color:{{ railColors.proj02a }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">02-A · Iniciação Científica</a>
+          <a onClick="{{ scrollToProj02b }}" style="cursor:pointer;color:{{ railColors.proj02b }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">02-B · Agência Araraúna</a>
+          <a onClick="{{ scrollToProj02c }}" style="cursor:pointer;color:{{ railColors.proj02c }};font-size:12px;text-decoration:none;padding:4px 0 4px 12px">02-C · Araraúna X Bagnare</a>
+
+          <a onClick="{{ scrollToContato }}" style="cursor:pointer;color:{{ railContatoColor }};font-weight:700;font-size:13px;text-decoration:none;padding:10px 0 4px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1)">Contato</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- NAV -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(6,6,6,0.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div style="max-width:1300px;margin:0 auto;padding:16px 60px;display:flex;gap:36px;overflow-x:auto">
+      <a onClick="{{ scrollToHome }}" style="cursor:pointer;color:{{ navHomeColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navHomeBorder }};padding-bottom:4px">Home</a>
+      <a onClick="{{ scrollToCorp }}" style="cursor:pointer;color:{{ navCorpColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navCorpBorder }};padding-bottom:4px">Projetos Corporativos</a>
+      <a onClick="{{ scrollToAcad }}" style="cursor:pointer;color:{{ navAcadColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navAcadBorder }};padding-bottom:4px">Projetos Acadêmicos</a>
+    </div>
+  </div>
+
+  <!-- ===== HOME ===== -->
+  <div id="sec-home" data-screen-label="Home" style="width:100%;position:relative">
+    <div style="position:absolute;top:20px;left:0;right:0;z-index:5">
+      <div style="max-width:1300px;margin:0 auto;padding:0 60px;display:flex;justify-content:flex-end">
+        <div style="display:flex;align-items:center;gap:18px">
+          <div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
+            <svg viewBox="0 0 100 100" width="72" height="72">
+              <rect x="8" y="8" width="84" height="84" fill="none" stroke="{{ accentColor }}" stroke-width="3.5"></rect>
+              <path d="M28 66 L50 20 L72 66" fill="none" stroke="{{ accentColor }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
+              <ellipse cx="50" cy="66" rx="22" ry="9" fill="none" stroke="{{ accentColor }}" stroke-width="3"></ellipse>
+              <path d="M50 40 L55 60 L70 65 L55 70 L50 90 L45 70 L30 65 L45 60 Z" fill="#ffffff"></path>
+            </svg>
+          </div>
+          <div style="color:{{ accentColor }};font-weight:600;font-size:26px;line-height:1.3">Integridade e<br>Honestidade.</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:calc(100vh - 162px);height:calc(100dvh - 162px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;box-sizing:border-box">
+      <div style="max-width:1300px;margin:0 auto;padding:0 60px;width:100%;box-sizing:border-box">
+        <h1 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:130px;line-height:1.05;margin:0">Portf<i>ó</i>lio</h1>
+        <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:100px;line-height:1.1;margin:-8px 0 0;text-align:right">Gabriel Arouche</h2>
+      </div>
+    </div>
+
+    <div style="width:100%;height:14px;background:{{ accentColor }};margin-top:48px"></div>
+
+    
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
+      <div>
+        <h3 id="sec-about" style="font-family:'Playfair Display',serif;font-weight:600;color:{{ titleColor }};font-size:44px;margin:0 0 28px">S<i>o</i>bre meu trabalho:</h3>
+        <div style="position:relative;padding:22px 26px;max-width:520px" style-before="content:'';position:absolute;top:0;left:0;width:16px;height:16px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:16px;height:16px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:17px;line-height:1.7;color:#D9D9D9">Estudante de Relações Públicas na FECAP, com mais de 3 anos de experiência em comunicação institucional. Gosto do que faço porque gosto de gente, conversar, entender contexto, aproximar públicos que normalmente não se falariam. É isso que me atraiu pra RP: a ideia de que comunicação boa é, no fundo, relação bem construída.</p><p style="margin: 24px 0 0; font-size: 17px; line-height: 1.7; color: #D9D9D9; text-align: justify">Meu portfólio reúne experiência profissional real, projetos acadêmicos e criações autorais - tudo que já testei na prática e no estudo de Relações Públicas.</p>
+        </div>
+      </div>
+      <div>
+        <div style="border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; padding: 6px; background: rgba(255,255,255,0.02); width: 100%; max-width: 400px; margin: 0 auto"><div style="width: 100%; aspect-ratio: 4/4.2; background: #0a0a0a; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="assets/home-visual-gabriel-full.jpg" alt="Foto autoral de Gabriel Arouche" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div></div>
+      </div>
+    </div><div style="width:100%;height:14px;background:{{ accentColor }}"></div>
+
+    <!-- Timeline -->
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 72px">
+      <h3 style="font-family:'Playfair Display',serif;font-weight:600;color:{{ titleColor }};font-size:36px;margin:0 0 48px">Trajetória</h3>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2021 - fev/2022</div>
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
+            <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
+          </div>
+          <div style="padding-bottom:36px">
+            <div style="font-weight:600;font-size:17px;color:#F4F4F4">Assistente Geral</div>
+            <div style="font-size:15px;color:#FFFFFF">Bagnare Cosméticos</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">jun/2023 - jun/2025</div>
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
+            <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
+          </div>
+          <div style="padding-bottom:36px">
+            <div style="font-weight:600;font-size:17px;color:#F4F4F4">Estagiário de Comunicação</div>
+            <div style="font-size:15px;color:#FFFFFF">Puracy Aromas</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">mar/2024 - dez/2027</div>
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
+            <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
+          </div>
+          <div style="padding-bottom:36px">
+            <div style="font-weight:600;font-size:17px;color:#F4F4F4">Bacharelado em Relações Públicas</div>
+            <div style="font-size:15px;color:#FFFFFF">FECAP</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2026 - atual</div>
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:17px;color:#F4F4F4">Estagiário de Relações Públicas</div>
+            <div style="font-size:15px;color:#FFFFFF">ABIARB / SINDIBOR / ARESP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1300px;margin:0 auto;padding:48px 60px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+
+  <!-- ===== PROJETOS CORPORATIVOS ===== -->
+  <div id="sec-corp" data-screen-label="Projetos Corporativos" style="width:100%;position:relative">
+    <div style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Corporativos</h2>
+    </div>
+
+    <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
+
+    <!-- 01-A -->
+    <div id="proj-01a" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-A</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">CRM e Metodologia de Segmentação</h3>
+      <div style="position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Estruturação, do zero, do sistema de relacionamento com os associados das entidades ABIARB, SINDIBOR e ARESP.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Diagnóstico central do projeto: o churn tende a ocorrer mais por ausência de presença e contato do que por falha na qualidade do serviço. A partir disso, definição de uma segmentação em quatro perfis (Fiel Ativo, Silencioso Estável, Em Risco e Recém-chegado), cada um com cadência própria de contato.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">O trabalho resultou em uma planilha de CRM com controle individual de cada associado (situação, último e próximo contato, histórico de temas tratados), usada como base operacional do Plano Trimestral de Contato e Retenção da entidade.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">A mesma lógica de segmentação foi aplicada à prospecção de novos associados: classificação por porte (MEI, Microempresa, Pequeno, Médio e Grande Porte) com critérios objetivos baseados em dados públicos, e sistema de pontuação por aderência e potencial de relacionamento, priorizando a atuação nos contatos com maior probabilidade de conversão.</p>
+      </div>
+
+      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a">
+        <div style="font-size:13px;font-weight:700;color:{{ accentColor }};text-transform:uppercase;letter-spacing:0.06em;margin-bottom:24px;text-align:center">CRM Associativo - Diagnóstico à Retenção</div>
+        <div style="display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr;gap:0 12px;align-items:stretch">
+          <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center">
+            <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em">1 · Diagnóstico</div>
+            <div style="font-size:13.5px;line-height:1.5;color:#D9D9D9">Churn tende a ocorrer mais por ausência de contato do que por falha de serviço.</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px">2 · Quatro perfis</div>
+            <div style="border-radius:8px;background:#EA1478;padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">★ Fiel Ativo</div>
+            <div style="border-radius:8px;background:rgba(234,20,120,0.68);padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">◐ Silencioso Estável</div>
+            <div style="border-radius:8px;background:rgba(234,20,120,0.42);padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">⚠ Em Risco</div>
+            <div style="border-radius:8px;background:rgba(234,20,120,0.22);padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">✦ Recém-chegado</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+            <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em;text-align:center">3 · Cadência</div>
+            <div style="font-size:13px;line-height:1.6;color:#D9D9D9;text-align:center">Intensidade decrescente:<br>Contato mais frequente para <br>Em Risco e Recém-chegado,<br>mais espaçado para Fiel Ativo e Silencioso Estável.</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;gap:8px;justify-content:center">
+            <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em">4 · Resultado</div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #D9D9D9; text-align: justify">Plano Trimestral de Contato e Retenção: referência padrão para a rotina de relacionamento com associados e com potencias empresas associadas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+
+    <!-- 01-B -->
+    <div id="proj-01b" style="max-width:1300px;margin:0 auto;padding:0 60px">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-B</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Campanha B2B / Automação</h3>
+      <div style="position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Trilha de e-mail marketing B2B estruturada para prospecção e engajamento de associados e potenciais associados do setor de borracha e reforma de pneus.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Sequência de sete e-mails segmentados por porte (Grande, Pequeno e Micro), com lógica de priorização cruzando engajamento e potencial de relacionamento.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Da concepção da régua à execução na plataforma AKNA, incluindo o desenho dos headers e a estrutura de copy de cada disparo.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Encerrei o ciclo com contato telefônico direto a sócios e diretores das empresas selecionadas, apresentando as entidades, agendando conversas com a presidência executiva e criando relacionamentos que sustentam a prospecção no longo prazo.</p>
+      </div>
+
+      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a">
+        <div style="font-size:13px;font-weight:700;color:{{ accentColor }};text-transform:uppercase;letter-spacing:0.06em;margin-bottom:28px;text-align:center">Régua B2B - 3 portes × 7 disparos</div>
+        <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;margin-bottom:10px">
+          <div></div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E1<br><br>Apresentação</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E2<br><br>Isolamento</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E3<br><br>Financeiro</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E4<br><br>Prova social</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E5<br><br>Regulatório</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E6<br><br>Urgência</div>
+          <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E7<br><br>Fechamento</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+            <div style="font-size:14px;font-weight:700;color:#fff;background:#EA1478;border-radius:6px;padding:6px 10px;text-align:center">Grande</div>
+            <div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478;box-shadow:0 0 0 2px #fff"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+            <div style="font-size:14px;font-weight:700;color:#fff;background:rgba(234,20,120,0.55);border-radius:6px;padding:6px 10px;text-align:center">Pequeno</div>
+            <div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55);box-shadow:0 0 0 2px #fff"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+            <div style="font-size:14px;font-weight:700;color:{{ titleColor }};background:rgba(234,20,120,0.18);border-radius:6px;padding:6px 10px;text-align:center">Micro</div>
+            <div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22);box-shadow:0 0 0 2px #fff"></div>
+          </div>
+        </div>
+        <div style="margin-top:28px;display:flex;justify-content:center">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 20px;border-radius:8px;background:rgba(234,20,120,0.1);border:1px solid rgba(234,20,120,0.4);width:fit-content">
+            <span style="width:16px;height:16px;border-radius:4px;background:rgba(234,20,120,0.5);box-shadow:0 0 0 2px #fff;flex:none"></span>
+            <span style="font-size:12.5px;color:#D9D9D9">Contorno branco = contato prioritário (alto engajamento × alto potencial de relacionamento)</span>
+          </div>
+        </div>
+        <div style="margin-top:24px;padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);max-width:640px;margin-left:auto;margin-right:auto;text-align:center">
+          <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">RESULTADO</div>
+          <div style="font-size:13.5px;line-height:1.5;color:#D9D9D9">Contatos com engajamento e potencial unidos<br>viram ligação de prospecção qualificada, com timing planejado.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+
+    <!-- 01-C -->
+    <div id="proj-01c" style="max-width:1300px;margin:0 auto;padding:0 60px">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-C</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">EXPOBOR &amp; PNEUSHOW 2026</h3>
+      <div style="display:flex;gap:48px;align-items:center">
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Organização e execução da comunicação institucional para a maior feira de borracha e pneus da América Latina, com mais de 9.600 visitantes de 20 países.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Do convite VIP, à série de e-mails Arena do Conhecimento, com copy e estrutura próprias para cada palestra.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Encerrei o ciclo com a recepção institucional presencial durante os três dias de evento. Além de recepcionar e assessorar os palestrantes e empresas convidadas.</p>
+        </div>
+        <div style="flex:1">
+          <div style="position:relative;width:100%;aspect-ratio:4/3;background:#111;border:1px solid rgba(255,255,255,0.28);border-radius:8px;overflow:hidden">
+            <sc-if value="{{ carousel01c.is0 }}"><img onClick="{{ carousel01c.open }}" src="assets/expobor-linkedin-abiarb.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01c.is1 }}"><img onClick="{{ carousel01c.open }}" src="assets/expobor-palestra-gabriel.jpg" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%"></sc-if>
+            <sc-if value="{{ carousel01c.is2 }}"><img onClick="{{ carousel01c.open }}" src="assets/convite-vip-1.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01c.is3 }}"><img onClick="{{ carousel01c.open }}" src="assets/pneushow-linkedin-aresp.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01c.is4 }}"><img onClick="{{ carousel01c.open }}" src="assets/palestra-ricca.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01c.is5 }}"><img onClick="{{ carousel01c.open }}" src="assets/convite-vip-2.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <button onClick="{{ carousel01c.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01c.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01c.counter }}</div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
+            <sc-for list="{{ carousel01c.dots }}" as="dot" hint-placeholder-count="6">
+              <span onClick="{{ dot.onClick }}" style="cursor:pointer;width:7px;height:7px;border-radius:50%;background:{{ dot.active }};display:block"></span>
+            </sc-for>
+          </div>
+          <p style="text-align:center;margin:14px 0 0"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">EXPOBOR &amp; PNEUSHOW 2026</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">16ª edição, maior feira do setor na América Latina</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Do convite à recepção presencial</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+
+    <!-- 01-D -->
+    <div id="proj-01d" style="max-width:1300px;margin:0 auto;padding:0 60px">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-D</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Bagnare Cosméticos</h3>
+      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Atuação em comunicação e marketing digital na Bagnare Cosméticos, com foco em reposicionamento de marca e fortalecimento de presença nos canais B2C e B2B.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">O trabalho incluiu execução de campanhas em marketplaces, com estruturação de conteúdo e identidade visual alinhada ao posicionamento da marca, além de comunicação voltada a fornecedores e parceiros comerciais no eixo B2B.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Também fiz parte da produção visual da marca - da organização de feed e cronograma de postagens institucionais e promocionais à criação das peças gráficas ao lado. Tudo seguindo as diretrizes próprias de marca (paleta e tipografia Questrial/Muli), com acompanhamento de indicadores de engajamento e reputação.</p>
+        </div>
+        <div style="flex:1">
+          
+          <div style="position: relative; width: 436px; aspect-ratio: 1/1; background: #111; border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; overflow: hidden; height: 436px; margin: 0 auto">
+            <sc-if value="{{ carousel01d.is0 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-consciencia-negra.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <sc-if value="{{ carousel01d.is1 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-lavanda.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <sc-if value="{{ carousel01d.is2 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-5-beneficios.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <sc-if value="{{ carousel01d.is3 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-bem-estar.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <sc-if value="{{ carousel01d.is4 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-bingo.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <sc-if value="{{ carousel01d.is5 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-proclamacao.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+            <button onClick="{{ carousel01d.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01d.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01d.counter }}</div>
+          </div><div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
+            <sc-for list="{{ carousel01d.dots }}" as="dot" hint-placeholder-count="6">
+              <span onClick="{{ dot.onClick }}" style="cursor:pointer;width:7px;height:7px;border-radius:50%;background:{{ dot.active }};display:block"></span>
+            </sc-for>
+          </div>
+          <p style="text-align:center;margin:14px 0 0"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">BAGNARE COSMÉTICOS</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Reposicionamento de marca e campanhas B2B durante estágio</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">De marketplaces a relacionamento com fornecedores</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+
+    <!-- 01-E -->
+    <div id="proj-01e" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-E</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Peças institucionais</h3>
+      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+        <div style="flex:1">
+          <div style="position:relative;width:100%;aspect-ratio:4/3;background:#111;border:1px solid rgba(255,255,255,0.28);border-radius:8px;overflow:hidden">
+            <sc-if value="{{ carousel01e.is0 }}"><img onClick="{{ carousel01e.open }}" src="assets/lona-interna.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01e.is1 }}"><img onClick="{{ carousel01e.open }}" src="assets/header-reuniao-presidencia.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01e.is2 }}"><img onClick="{{ carousel01e.open }}" src="assets/linkedin-abiarb.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01e.is3 }}"><img onClick="{{ carousel01e.open }}" src="assets/header-reuniao-abrafiltros.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01e.is4 }}"><img onClick="{{ carousel01e.open }}" src="assets/info086-face-insta.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01e.is5 }}"><img onClick="{{ carousel01e.open }}" src="assets/header.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <button onClick="{{ carousel01e.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01e.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01e.counter }}</div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
+            <sc-for list="{{ carousel01e.dots }}" as="dot" hint-placeholder-count="6">
+              <span onClick="{{ dot.onClick }}" style="cursor:pointer;width:7px;height:7px;border-radius:50%;background:{{ dot.active }};display:block"></span>
+            </sc-for>
+          </div>
+          <p style="text-align:center;margin:14px 0 0"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">Peças institucionais</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Produção gráfica aplicada à comunicação</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Illustrator e identidade de marca</span></p>
+        </div>
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Produção de peças gráficas de apoio à comunicação institucional do Sindibor, ABIARB e ARESP - headers de e-mail, posts institucionais e materiais de apoio para eventos.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Trabalho executado em Illustrator, sempre alinhado à identidade visual de cada entidade.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+
+    <!-- 01-F -->
+    <div id="proj-01f" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+      <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-F</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Identidade Visual AbiarbConecta</h3>
+      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Desenvolvimento do manual de identidade visual completo do AbiarbConecta, a partir do logotipo já existente da marca.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Estruturação de toda a aplicação da marca: paleta de cores institucional e auxiliar, hierarquia tipográfica, área de proteção e escala mínima de redução, além das versões monocromáticas (positiva, negativa e em cinza) para uso em diferentes fundos.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Também defini os testes de contraste e luminosidade sobre fundos coloridos e fotográficos, e desenvolvi os dois elementos gráficos auxiliares da marca - o padrão de circuito e as faixas onduladas - usados como linguagem visual de apoio em toda produção gráfica futura da plataforma.</p>
+        </div>
+        <div style="flex:1">
+          <div style="position:relative;width:100%;aspect-ratio:4/3;background:#ffffff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;overflow:hidden">
+            <sc-if value="{{ carousel01f.is0 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-contraste-cores.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01f.is1 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-monocromatico.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <sc-if value="{{ carousel01f.is2 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-area-protecao.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
+            <button onClick="{{ carousel01f.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01f.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01f.counter }}</div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
+            <sc-for list="{{ carousel01f.dots }}" as="dot" hint-placeholder-count="3">
+              <span onClick="{{ dot.onClick }}" style="cursor:pointer;width:7px;height:7px;border-radius:50%;background:{{ dot.active }};display:block"></span>
+            </sc-for>
+          </div>
+          <p style="text-align:center;margin:14px 0 0"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">Identidade Visual AbiarbConecta</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Sistema de marca completo para o Hub de Inteligência da Borracha</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Da paleta de cores à linguagem visual auxiliar</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:0 60px 32px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+  </div>
+
+  <!-- ===== PROJETOS ACADEMICOS ===== -->
+  <div id="sec-acad" data-screen-label="Projetos Acadêmicos" style="width:100%;position:relative">
+    <div style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Acadêmicos</h2>
+    </div>
+
+    <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
+
+    <!-- 02-A -->
+    <div id="proj-02a" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
+      <div style="color: {{ titleColor }}; font-size: 20px; font-weight: 600; margin-bottom: 4px; font-family: Poppins">Projeto 02-A</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Iniciação Científica: Framing e Narrativa</h3>
+      <div style="max-width:760px;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+        <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Pesquisa de Iniciação Científica selecionada para a Bolsa Pró-Ciência da FECAP (mar/2026 a jul/2027), com o tema "Framing e Construção de Narrativa em Comunicação Política".</p>
+        <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Investigação de como diferentes enquadramentos discursivos moldam a percepção pública de um mesmo fato, com foco em metodologia de análise de discurso e construção de argumento, não na defesa de posição política específica.</p>
+        <p class="justify-pt" lang="pt-BR" style="margin: 0; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">O projeto desenvolve a leitura crítica de texto e a capacidade de identificar estrutura narrativa por trás de qualquer peça de comunicação, competência aplicada diretamente nos projetos de copy institucional do portfólio.</p>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+
+    <!-- 02-B -->
+    <div id="proj-02b" style="max-width:1300px;margin:0 auto;padding:0 60px">
+      <div style="color:{{ titleColor }};font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;margin-bottom:4px">Projeto 02-B</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Agência Araraúna</h3>
+      <div style="display:flex;gap:48px;align-items:center">
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Projeto em grupo desenvolvido na disciplina Técnicas de Relações Públicas (trabalho semestral), com criação da agência Araraúna: identidade visual, organograma e portfólio de serviços (diagnóstico de comunicação, mídias sociais, comunicação interna, eventos, gestão de crise, marketing de influência e pesquisa).</p>
+          <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Como aplicação prática, de forma pro-bono, atendemos o Resort Éden Sand: o briefing apontou desafios de restauração de confiança e pós-crise. Estruturamos três frentes de ação, previmos mensuração por pesquisas de reputação e comunicação e modelo de fee mensal variável, evidenciando o papel estratégico de RP na revitalização da marca.</p>
+          
+        </div>
+        <div style="flex:1">
+          <div style="border:1px solid rgba(255,255,255,0.28);border-radius:16px;padding:16px;background:#ffffff;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center"><img src="assets/ararauna-logo.png" alt="Logo Araraúna Comunicação" style="width:100%;height:100%;object-fit:contain"></div>
+          <p style="text-align:center;margin:14px 0 0;font-family:'Poppins',sans-serif"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">Araraúna Comunicação</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Agência brasileira de comunicação</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Usando o poder da voz, valorizamos relações profundas e duradouras</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+
+    <!-- 02-C -->
+    <div id="proj-02c" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+      <div style="color:{{ titleColor }};font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;margin-bottom:4px">Projeto 02-C</div>
+      <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Araraúna X Bagnare</h3>
+      <div style="display:flex;gap:48px;align-items:center">
+        <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+          <div style="border: 1px solid rgba(255,255,255,0.28); border-radius: 16px; padding: 8px; aspect-ratio: 13/10; overflow: hidden"><img src="assets/ararauna-bagnare-combo.png" alt="Identidade Araraúna e produtos Bagnare" style="width:100%;height:100%;object-fit:cover;border-radius:8px;display:block"></div>
+          <p style="text-align:center;margin:0;font-family:'Poppins',sans-serif"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">Araraúna x Bagnare</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Reposicionamento digital da marca</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Ao olharmos a marca, enxergamos seu potencial de alcance</span></p>
+        </div>
+        <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
+          <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Como continuação do projeto Araraúna, aplicamos a metodologia da agência a um cliente real - a Bagnare Cosméticos, onde já estagiei.</p>
+          <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">O objetivo foi reposicionar a presença digital da marca e fortalecer sua lembrança, conectando o propósito de bem-estar e aconchego aos públicos B2C e B2B. Partimos de um diagnóstico da presença atual e estruturamos um plano de ação com reforço de identidade, organização de feed, highlights enxutos e cronograma de postagens institucionais e promocionais para Instagram e Facebook, orientado por pilares de conteúdo e diretrizes visuais (paleta e tipografia Questrial/Muli).</p>
+          <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">A proposta de execução foi formatada como um job de 3 meses, realizado pro bono no contexto acadêmico, com indicadores de reputação e engajamento para acompanhamento dos resultados.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
+
+  <!-- FOOTER -->
+  <div id="sec-footer" style="max-width:1300px;margin:0 auto;padding:56px 60px 12px;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center">
+    <div style="display:flex;align-items:center;gap:18px">
+      <div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
+        <svg viewBox="0 0 100 100" width="72" height="72">
+          <rect x="8" y="8" width="84" height="84" fill="none" stroke="{{ accentColor }}" stroke-width="3.5"></rect>
+          <path d="M28 66 L50 20 L72 66" fill="none" stroke="{{ accentColor }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
+          <ellipse cx="50" cy="66" rx="22" ry="9" fill="none" stroke="{{ accentColor }}" stroke-width="3"></ellipse>
+          <path d="M50 40 L55 60 L70 65 L55 70 L50 90 L45 70 L30 65 L45 60 Z" fill="#ffffff"></path>
+        </svg>
+      </div>
+      <div style="color:{{ accentColor }};font-family:'Poppins',sans-serif;font-weight:600;font-size:26px;line-height:1.3;text-align:left">Integridade e<br>Honestidade.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-family:'Poppins',sans-serif;font-size:16px;color:{{ accentColor }}">
+      <div>(11) 94645-8744</div>
+      <div><a href="https://linkedin.com/in/gabrielarouche-rp" target="_blank" rel="noopener" style="color:{{ accentColor }};text-decoration:none;display:inline-flex;align-items:center;gap:4px">linkedin.com/in/gabrielarouche-rp<span style="font-size:13px">↗</span></a></div>
+      <div><a href="mailto:gabrielarouche.ta@gmail.com" style="color:{{ accentColor }};text-decoration:none;display:inline-flex;align-items:center;gap:4px">gabrielarouche.ta@gmail.com</a></div>
+    </div>
+    <div style="width:280px;height:2px;background:{{ accentColor }}"></div>
+  </div>
+
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#EA1478&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;titleColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9FE3DA&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { active: 'sec-home', activeProj: null, railOpen: false, lightbox: { open: false, group: null, index: 0 }, carousel: { '01c': 0, '01e': 0, '01f': 0, '01d': 0 } };
+
+  imagesData = {
+    '01c': [
+      { src: 'assets/expobor-linkedin-abiarb.png', alt: 'Post LinkedIn Expobor' },
+      { src: 'assets/expobor-palestra-gabriel.jpg', alt: 'Recepção institucional na Expobor & Pneushow' },
+      { src: 'assets/convite-vip-1.png', alt: 'Convite VIP - modelo sanitizado, página 1' },
+      { src: 'assets/pneushow-linkedin-aresp.png', alt: 'Post LinkedIn Pneushow' },
+      { src: 'assets/palestra-ricca.png', alt: 'Divulgação palestra Sheila Madrid Saad' },
+      { src: 'assets/convite-vip-2.png', alt: 'Convite VIP - modelo sanitizado, página 2' },
+    ],
+    '01e': [
+      { src: 'assets/lona-interna.png', alt: 'Lona interna' },
+      { src: 'assets/header-reuniao-presidencia.png', alt: 'Header reunião com a presidência' },
+      { src: 'assets/linkedin-abiarb.png', alt: 'Post LinkedIn Abiarb' },
+      { src: 'assets/header-reuniao-abrafiltros.png', alt: 'Header reunião Abrafiltros' },
+      { src: 'assets/info086-face-insta.png', alt: 'Informativo 086/2026' },
+      { src: 'assets/header.png', alt: 'Header institucional' },
+    ],
+    '01f': [
+      { src: 'assets/abiarbconecta-contraste-cores.png', alt: 'Testes de contraste e luminosidade da marca AbiarbConecta' },
+      { src: 'assets/abiarbconecta-monocromatico.png', alt: 'Versões monocromáticas e em cinza da marca AbiarbConecta' },
+      { src: 'assets/abiarbconecta-area-protecao.png', alt: 'Diagrama de área de proteção da marca AbiarbConecta' },
+    ],
+    '01d': [
+      { src: 'assets/bagnare-consciencia-negra.jpg', alt: 'Post Instagram Bagnare - Dia da Consciência Negra' },
+      { src: 'assets/bagnare-lavanda.jpg', alt: 'Post Instagram Bagnare - benefícios do óleo de Lavanda' },
+      { src: 'assets/bagnare-5-beneficios.jpg', alt: 'Post Instagram Bagnare - 5 benefícios da aromaterapia' },
+      { src: 'assets/bagnare-bem-estar.jpg', alt: 'Post Instagram Bagnare - valorizamos seu bem-estar' },
+      { src: 'assets/bagnare-bingo.jpg', alt: 'Post Instagram Bagnare - Bingo do Bem-Estar' },
+      { src: 'assets/bagnare-proclamacao.jpg', alt: 'Post Instagram Bagnare - Proclamação da República' },
+    ],
+  };
+
+  stepCarousel(group, delta) {
+    this.setState((s) => {
+      const len = this.imagesData[group].length;
+      const index = (s.carousel[group] + delta + len) % len;
+      return { carousel: { ...s.carousel, [group]: index } };
+    });
+  }
+
+  openLightbox(group, index) { this.setState({ lightbox: { open: true, group, index } }); }
+  closeLightbox() { this.setState({ lightbox: { open: false, group: null, index: 0 } }); }
+  stepLightbox(delta) {
+    this.setState((s) => {
+      const list = this.imagesData[s.lightbox.group] || [];
+      const len = list.length || 1;
+      const index = (s.lightbox.index + delta + len) % len;
+      return { lightbox: { ...s.lightbox, index } };
+    });
+  }
+
+  componentDidMount() {
+    this.sectionIds = ['sec-home', 'sec-corp', 'sec-acad'];
+    this.projectIds = ['proj-01a', 'proj-01b', 'proj-01c', 'proj-01d', 'proj-01e', 'proj-01f', 'proj-02a', 'proj-02b', 'proj-02c'];
+    this.onScroll = () => {
+      let current = this.sectionIds[0];
+      for (const id of this.sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top - 100 <= 0) current = id;
+      }
+      let currentProj = null;
+      for (const id of this.projectIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top - 140 <= 0) currentProj = id;
+      }
+      if (current !== this.state.active || currentProj !== this.state.activeProj) {
+        this.setState({ active: current, activeProj: currentProj });
+      }
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+    this.onKeyDown = (e) => {
+      if (this.state.lightbox.open) {
+        if (e.key === 'ArrowLeft') this.stepLightbox(-1);
+        else if (e.key === 'ArrowRight') this.stepLightbox(1);
+        else if (e.key === 'Escape') this.closeLightbox();
+      }
+    };
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    this.setState({ railOpen: false });
+  }
+
+  renderVals() {
+    const accentColor = this.props.accentColor ?? '#EA1478';
+    const titleColor = this.props.titleColor ?? '#9FE3DA';
+    const active = this.state.active;
+    const activeProj = this.state.activeProj;
+    const colorFor = (id) => (active === id ? titleColor : '#F4F4F4');
+    const borderFor = (id) => (active === id ? accentColor : 'transparent');
+    const projColorFor = (id) => (activeProj === id ? accentColor : '#9A9A9A');
+    const projectIds = ['proj-01a', 'proj-01b', 'proj-01c', 'proj-01d', 'proj-01e', 'proj-01f', 'proj-02a', 'proj-02b', 'proj-02c'];
+    const mkCarousel = (group) => {
+      const list = this.imagesData[group];
+      const idx = this.state.carousel[group];
+      const out = {
+        alt: list[idx].alt,
+        counter: (idx + 1) + ' / ' + list.length,
+        dots: list.map((_, i) => ({ active: i === idx ? (this.props.accentColor ?? '#EA1478') : 'rgba(255,255,255,0.25)', onClick: () => this.setState((s) => ({ carousel: { ...s.carousel, [group]: i } })) })),
+        prev: () => this.stepCarousel(group, -1),
+        next: () => this.stepCarousel(group, 1),
+        open: () => this.openLightbox(group, idx),
+      };
+      list.forEach((_, i) => { out['is' + i] = i === idx; });
+      return out;
+    };
+    const lb = this.state.lightbox;
+    const lbList = lb.group ? this.imagesData[lb.group] : [];
+    const lbCurrent = lbList[lb.index] || { src: '', alt: '' };
+    const lbFlags = {};
+    ['01c', '01e', '01f', '01d'].forEach((g) => {
+      this.imagesData[g].forEach((_, i) => { lbFlags['p' + g + '_' + i] = lb.open && lb.group === g && lb.index === i; });
+    });
+    const railColors = {};
+    for (const id of projectIds) railColors[id.replace('proj-', 'proj')] = projColorFor(id);
+    return {
+      accentColor,
+      titleColor,
+      navHomeColor: colorFor('sec-home'),
+      navCorpColor: colorFor('sec-corp'),
+      navAcadColor: colorFor('sec-acad'),
+      navHomeBorder: borderFor('sec-home'),
+      navCorpBorder: borderFor('sec-corp'),
+      navAcadBorder: borderFor('sec-acad'),
+      railHomeColor: colorFor('sec-home'),
+      railCorpColor: colorFor('sec-corp'),
+      railAcadColor: colorFor('sec-acad'),
+      railColors,
+      scrollToHome: () => this.scrollTo('sec-home'),
+      scrollToCorp: () => this.scrollTo('sec-corp'),
+      scrollToAcad: () => this.scrollTo('sec-acad'),
+      scrollToProj01a: () => this.scrollTo('proj-01a'),
+      scrollToProj01b: () => this.scrollTo('proj-01b'),
+      scrollToProj01c: () => this.scrollTo('proj-01c'),
+      scrollToProj01d: () => this.scrollTo('proj-01d'),
+      scrollToProj01e: () => this.scrollTo('proj-01e'),
+      scrollToProj01f: () => this.scrollTo('proj-01f'),
+      scrollToProj02a: () => this.scrollTo('proj-02a'),
+      scrollToProj02b: () => this.scrollTo('proj-02b'),
+      scrollToProj02c: () => this.scrollTo('proj-02c'),
+      scrollToContato: () => this.scrollTo('sec-footer'),
+      scrollToAbout: () => this.scrollTo('sec-about'),
+      railContatoColor: '#F4F4F4',
+      railAboutColor: '#F4F4F4',
+      railHeight: this.state.railOpen ? '640px' : '0px',
+      railVisible: active === 'sec-home' ? 0 : 1,
+      railPointerEvents: active === 'sec-home' ? 'none' : 'auto',
+      openRail: () => this.setState({ railOpen: true }),
+      closeRail: () => this.setState({ railOpen: false }),
+      carousel01c: mkCarousel('01c'),
+      carousel01e: mkCarousel('01e'),
+      carousel01f: mkCarousel('01f'),
+      carousel01d: mkCarousel('01d'),
+      lightboxOpen: lb.open,
+      lightboxDisplay: lb.open ? 'flex' : 'none',
+      lightboxAlt: lbCurrent.alt,
+      lbFlags,
+      lightboxCounter: lbList.length ? (lb.index + 1) + ' / ' + lbList.length : '',
+      closeLightbox: () => this.closeLightbox(),
+      prevLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.stepLightbox(-1); },
+      nextLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.stepLightbox(1); },
+      stopProp: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+    };
+  }
+}
+</script>
+</body>
+</html>
