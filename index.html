@@ -10,11 +10,50 @@
 <helmet>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <style>
     body { margin: 0; background: #060606; }
     a { color: {{ accentColor }}; text-decoration: underline; }
     a:hover { color: #ffffff; }
     .justify-pt { text-align: justify; hyphens: auto; }
+
+    /* ---- Mobile / tablet responsive retrofit ---- */
+    .pf-nav-links { display: flex; }
+    .pf-hamburger { display: none; }
+    .pf-nav-drawer { display: flex; }
+
+    @media (max-width: 1023px) {
+      .pf-nav-links { display: none !important; }
+      .pf-hamburger { display: flex !important; }
+      .pf-siderail { display: none !important; }
+      .pf-badge-outer { justify-content: center !important; }
+      .pf-icon-row { flex-direction: column !important; text-align: center !important; }
+      .pf-icon-72 { width: 48px !important; height: 48px !important; }
+      .pf-icon-72 svg { width: 48px !important; height: 48px !important; }
+      .pf-badge-text { font-size: 18px !important; text-align: center !important; }
+      .pf-hero-wrap { height: auto !important; padding: 200px 0 40px !important; }
+      .pf-h1 { font-size: 52px !important; }
+      .pf-h2 { font-size: 40px !important; text-align: left !important; margin: 8px 0 0 !important; }
+      .pf-about-grid { grid-template-columns: 1fr !important; }
+      .pf-timeline-row { grid-template-columns: 1fr !important; row-gap: 6px !important; }
+      .pf-timeline-date { text-align: left !important; }
+      .pf-timeline-dotcol { display: none !important; }
+      .pf-title2 { margin-left: 0 !important; }
+      .pf-title1, .pf-title2 { font-size: 34px !important; }
+      .pf-proj-row { flex-direction: column !important; gap: 32px !important; }
+      .pf-crm-grid { grid-template-columns: 1fr !important; }
+      .pf-crm-arrow { display: none !important; }
+      .pf-carousel-fixed { width: 100% !important; height: auto !important; }
+      .pf-touch-btn { width: 44px !important; height: 44px !important; font-size: 20px !important; }
+      .pf-nav-drawer { display: none; }
+    }
+    @media (max-width: 767px) {
+      .pf-px { padding-left: 16px !important; padding-right: 16px !important; }
+      .pf-b2b-grid { min-width: 640px !important; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .pf-px { padding-left: 32px !important; padding-right: 32px !important; }
+    }
   </style>
 </helmet>
 <x-import component-from-global-scope="image-slot" from="./image-slot.js" hint-size="0,0" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none"></x-import>
@@ -58,7 +97,7 @@
   </sc-if>
 
 <!-- SIDE RAIL -->
-  <div onMouseEnter="{{ openRail }}" onMouseLeave="{{ closeRail }}" style="position:fixed;left:24px;top:80px;z-index:40;opacity:{{ railVisible }};pointer-events:{{ railPointerEvents }};transition:opacity 0.25s ease">
+  <div class="pf-siderail" onMouseEnter="{{ openRail }}" onMouseLeave="{{ closeRail }}" style="position:fixed;left:24px;top:80px;z-index:40;opacity:{{ railVisible }};pointer-events:{{ railPointerEvents }};transition:opacity 0.25s ease">
     <div style="cursor:default;padding:8px 14px;background:rgba(15,15,15,0.9);border:1px solid rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;gap:8px;width:fit-content">
       <span style="display:flex;gap:3px">
         <span style="display:block;width:2px;height:12px;background:{{ accentColor }}"></span>
@@ -94,19 +133,35 @@
 
   <!-- NAV -->
   <div style="position:sticky;top:0;z-index:50;background:rgba(6,6,6,0.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.08)">
-    <div style="max-width:1300px;margin:0 auto;padding:16px 60px;display:flex;gap:36px;overflow-x:auto">
-      <a onClick="{{ scrollToHome }}" style="cursor:pointer;color:{{ navHomeColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navHomeBorder }};padding-bottom:4px">Home</a>
-      <a onClick="{{ scrollToCorp }}" style="cursor:pointer;color:{{ navCorpColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navCorpBorder }};padding-bottom:4px">Projetos Corporativos</a>
-      <a onClick="{{ scrollToAcad }}" style="cursor:pointer;color:{{ navAcadColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navAcadBorder }};padding-bottom:4px">Projetos Acadêmicos</a>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:16px 60px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div class="pf-nav-links" style="gap:36px;overflow-x:auto">
+        <a onClick="{{ scrollToHome }}" style="cursor:pointer;color:{{ navHomeColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navHomeBorder }};padding-bottom:4px">Home</a>
+        <a onClick="{{ scrollToCorp }}" style="cursor:pointer;color:{{ navCorpColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navCorpBorder }};padding-bottom:4px">Projetos Corporativos</a>
+        <a onClick="{{ scrollToAcad }}" style="cursor:pointer;color:{{ navAcadColor }};font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ navAcadBorder }};padding-bottom:4px">Projetos Acadêmicos</a>
+      </div>
+      <button class="pf-hamburger" onClick="{{ toggleNav }}" aria-label="Abrir menu" style="width:44px;height:44px;flex:none;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;align-items:center;justify-content:center;cursor:pointer;z-index:51">
+        <span style="display:flex;flex-direction:column;gap:5px;width:20px;margin:0 auto">
+          <span style="display:block;height:2px;width:100%;background:#F4F4F4"></span>
+          <span style="display:block;height:2px;width:100%;background:#F4F4F4"></span>
+          <span style="display:block;height:2px;width:100%;background:#F4F4F4"></span>
+        </span>
+      </button>
     </div>
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+      <div class="pf-nav-drawer" onClick="{{ toggleNav }}" style="position:fixed;inset:0;top:65px;z-index:51;background:rgba(6,6,6,0.98);flex-direction:column;padding:8px 24px">
+        <a onClick="{{ scrollToHome }}" style="cursor:pointer;color:{{ navHomeColor }};font-weight:600;font-size:20px;text-decoration:none;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.1)">Home</a>
+        <a onClick="{{ scrollToCorp }}" style="cursor:pointer;color:{{ navCorpColor }};font-weight:600;font-size:20px;text-decoration:none;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.1)">Projetos Corporativos</a>
+        <a onClick="{{ scrollToAcad }}" style="cursor:pointer;color:{{ navAcadColor }};font-weight:600;font-size:20px;text-decoration:none;padding:18px 0">Projetos Acadêmicos</a>
+      </div>
+    </sc-if>
   </div>
 
   <!-- ===== HOME ===== -->
   <div id="sec-home" data-screen-label="Home" style="width:100%;position:relative">
     <div style="position:absolute;top:20px;left:0;right:0;z-index:5">
-      <div style="max-width:1300px;margin:0 auto;padding:0 60px;display:flex;justify-content:flex-end">
-        <div style="display:flex;align-items:center;gap:18px">
-          <div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
+      <div class="pf-px pf-badge-outer" style="max-width:1300px;margin:0 auto;padding:0 60px;display:flex;justify-content:flex-end">
+        <div class="pf-icon-row" style="display:flex;align-items:center;gap:18px">
+          <div class="pf-icon-72" style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
             <svg viewBox="0 0 100 100" width="72" height="72">
               <rect x="8" y="8" width="84" height="84" fill="none" stroke="{{ accentColor }}" stroke-width="3.5"></rect>
               <path d="M28 66 L50 20 L72 66" fill="none" stroke="{{ accentColor }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
@@ -114,14 +169,14 @@
               <path d="M50 40 L55 60 L70 65 L55 70 L50 90 L45 70 L30 65 L45 60 Z" fill="#ffffff"></path>
             </svg>
           </div>
-          <div style="color:{{ accentColor }};font-weight:600;font-size:26px;line-height:1.3">Integridade e<br>Honestidade.</div>
+          <div class="pf-badge-text" style="color:{{ accentColor }};font-weight:600;font-size:26px;line-height:1.3">Integridade e<br>Honestidade.</div>
         </div>
       </div>
     </div>
-    <div style="height:calc(100vh - 162px);height:calc(100dvh - 162px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;box-sizing:border-box">
-      <div style="max-width:1300px;margin:0 auto;padding:0 60px;width:100%;box-sizing:border-box">
-        <h1 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:130px;line-height:1.05;margin:0">Portf<i>ó</i>lio</h1>
-        <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:100px;line-height:1.1;margin:-8px 0 0;text-align:right">Gabriel Arouche</h2>
+    <div class="pf-hero-wrap" style="height:calc(100vh - 162px);height:calc(100dvh - 162px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;box-sizing:border-box">
+      <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px;width:100%;box-sizing:border-box">
+        <h1 class="pf-h1" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:130px;line-height:1.05;margin:0">Portf<i>ó</i>lio</h1>
+        <h2 class="pf-h2" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:100px;line-height:1.1;margin:-8px 0 0;text-align:right">Gabriel Arouche</h2>
       </div>
     </div>
 
@@ -129,7 +184,7 @@
 
     
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
+    <div class="pf-px pf-about-grid" style="max-width:1300px;margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start">
       <div>
         <h3 id="sec-about" style="font-family:'Playfair Display',serif;font-weight:600;color:{{ titleColor }};font-size:44px;margin:0 0 28px">S<i>o</i>bre meu trabalho:</h3>
         <div style="position:relative;padding:22px 26px;max-width:520px" style-before="content:'';position:absolute;top:0;left:0;width:16px;height:16px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:16px;height:16px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
@@ -142,12 +197,12 @@
     </div><div style="width:100%;height:14px;background:{{ accentColor }}"></div>
 
     <!-- Timeline -->
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 72px">
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 72px">
       <h3 style="font-family:'Playfair Display',serif;font-weight:600;color:{{ titleColor }};font-size:36px;margin:0 0 48px">Trajetória</h3>
       <div style="display:flex;flex-direction:column;gap:0">
-        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
-          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2021 - fev/2022</div>
-          <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="pf-timeline-row" style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div class="pf-timeline-date" style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2021 - fev/2022</div>
+          <div class="pf-timeline-dotcol" style="display:flex;flex-direction:column;align-items:center">
             <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
             <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
           </div>
@@ -156,9 +211,9 @@
             <div style="font-size:15px;color:#FFFFFF">Bagnare Cosméticos</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
-          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">jun/2023 - jun/2025</div>
-          <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="pf-timeline-row" style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div class="pf-timeline-date" style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">jun/2023 - jun/2025</div>
+          <div class="pf-timeline-dotcol" style="display:flex;flex-direction:column;align-items:center">
             <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
             <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
           </div>
@@ -167,9 +222,9 @@
             <div style="font-size:15px;color:#FFFFFF">Puracy Aromas</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
-          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">mar/2024 - dez/2027</div>
-          <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="pf-timeline-row" style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div class="pf-timeline-date" style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">mar/2024 - dez/2027</div>
+          <div class="pf-timeline-dotcol" style="display:flex;flex-direction:column;align-items:center">
             <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
             <div style="width:2px;flex:1;background:#3a3a3a;margin-top:4px"></div>
           </div>
@@ -178,9 +233,9 @@
             <div style="font-size:15px;color:#FFFFFF">FECAP</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
-          <div style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2026 - atual</div>
-          <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="pf-timeline-row" style="display:grid;grid-template-columns:220px 24px 1fr;column-gap:24px">
+          <div class="pf-timeline-date" style="text-align:right;color:{{ titleColor }};font-weight:600;font-size:16px;padding-top:2px">fev/2026 - atual</div>
+          <div class="pf-timeline-dotcol" style="display:flex;flex-direction:column;align-items:center">
             <div style="width:12px;height:12px;border-radius:50%;background:{{ accentColor }};flex:none"></div>
           </div>
           <div>
@@ -192,19 +247,19 @@
     </div>
   </div>
 
-  <div style="max-width:1300px;margin:0 auto;padding:48px 60px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+  <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:48px 60px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
 
   <!-- ===== PROJETOS CORPORATIVOS ===== -->
   <div id="sec-corp" data-screen-label="Projetos Corporativos" style="width:100%;position:relative">
-    <div style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Corporativos</h2>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
+      <h2 class="pf-title1" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
+      <h2 class="pf-title2" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Corporativos</h2>
     </div>
 
     <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
 
     <!-- 01-A -->
-    <div id="proj-01a" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
+    <div id="proj-01a" class="pf-px" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-A</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">CRM e Metodologia de Segmentação</h3>
       <div style="position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
@@ -214,14 +269,14 @@
         <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">A mesma lógica de segmentação foi aplicada à prospecção de novos associados: classificação por porte (MEI, Microempresa, Pequeno, Médio e Grande Porte) com critérios objetivos baseados em dados públicos, e sistema de pontuação por aderência e potencial de relacionamento, priorizando a atuação nos contatos com maior probabilidade de conversão.</p>
       </div>
 
-      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a">
+      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a;overflow-x:auto">
         <div style="font-size:13px;font-weight:700;color:{{ accentColor }};text-transform:uppercase;letter-spacing:0.06em;margin-bottom:24px;text-align:center">CRM Associativo - Diagnóstico à Retenção</div>
-        <div style="display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr;gap:0 12px;align-items:stretch">
+        <div class="pf-crm-grid" style="display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr;gap:0 12px;align-items:stretch">
           <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center">
             <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em">1 · Diagnóstico</div>
             <div style="font-size:13.5px;line-height:1.5;color:#D9D9D9">Churn tende a ocorrer mais por ausência de contato do que por falha de serviço.</div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div class="pf-crm-arrow" style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
           <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;gap:10px">
             <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px">2 · Quatro perfis</div>
             <div style="border-radius:8px;background:#EA1478;padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">★ Fiel Ativo</div>
@@ -229,12 +284,12 @@
             <div style="border-radius:8px;background:rgba(234,20,120,0.42);padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">⚠ Em Risco</div>
             <div style="border-radius:8px;background:rgba(234,20,120,0.22);padding:10px;font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px">✦ Recém-chegado</div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div class="pf-crm-arrow" style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
           <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
             <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em;text-align:center">3 · Cadência</div>
             <div style="font-size:13px;line-height:1.6;color:#D9D9D9;text-align:center">Intensidade decrescente:<br>Contato mais frequente para <br>Em Risco e Recém-chegado,<br>mais espaçado para Fiel Ativo e Silencioso Estável.</div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
+          <div class="pf-crm-arrow" style="display:flex;align-items:center;justify-content:center;font-size:22px;color:{{ accentColor }}">→</div>
           <div style="padding:18px 16px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;gap:8px;justify-content:center">
             <div style="font-size:13px;font-weight:700;color:{{ titleColor }};text-transform:uppercase;letter-spacing:0.04em">4 · Resultado</div>
             <div style="font-size: 13.5px; line-height: 1.5; color: #D9D9D9; text-align: justify">Plano Trimestral de Contato e Retenção: referência padrão para a rotina de relacionamento com associados e com potencias empresas associadas.</div>
@@ -243,10 +298,10 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
 
     <!-- 01-B -->
-    <div id="proj-01b" style="max-width:1300px;margin:0 auto;padding:0 60px">
+    <div id="proj-01b" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-B</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Campanha B2B / Automação</h3>
       <div style="position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
@@ -256,9 +311,9 @@
         <p class="justify-pt" lang="pt-BR" style="margin:0;font-size:16px;line-height:1.7;color:#D9D9D9">Encerrei o ciclo com contato telefônico direto a sócios e diretores das empresas selecionadas, apresentando as entidades, agendando conversas com a presidência executiva e criando relacionamentos que sustentam a prospecção no longo prazo.</p>
       </div>
 
-      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a">
+      <div style="margin-top:40px;padding:36px 40px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:#0a0a0a;overflow-x:auto">
         <div style="font-size:13px;font-weight:700;color:{{ accentColor }};text-transform:uppercase;letter-spacing:0.06em;margin-bottom:28px;text-align:center">Régua B2B - 3 portes × 7 disparos</div>
-        <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;margin-bottom:10px">
+        <div class="pf-b2b-grid" style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;margin-bottom:10px">
           <div></div>
           <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E1<br><br>Apresentação</div>
           <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E2<br><br>Isolamento</div>
@@ -269,15 +324,15 @@
           <div style="text-align:center;font-size:11px;color:#9A9A9A;line-height:1.3">E7<br><br>Fechamento</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+          <div class="pf-b2b-grid" style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
             <div style="font-size:14px;font-weight:700;color:#fff;background:#EA1478;border-radius:6px;padding:6px 10px;text-align:center">Grande</div>
             <div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478;box-shadow:0 0 0 2px #fff"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div><div style="height:32px;border-radius:6px;background:#EA1478"></div>
           </div>
-          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+          <div class="pf-b2b-grid" style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
             <div style="font-size:14px;font-weight:700;color:#fff;background:rgba(234,20,120,0.55);border-radius:6px;padding:6px 10px;text-align:center">Pequeno</div>
             <div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55);box-shadow:0 0 0 2px #fff"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.55)"></div>
           </div>
-          <div style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
+          <div class="pf-b2b-grid" style="display:grid;grid-template-columns:110px repeat(7,1fr);gap:10px;align-items:center">
             <div style="font-size:14px;font-weight:700;color:{{ titleColor }};background:rgba(234,20,120,0.18);border-radius:6px;padding:6px 10px;text-align:center">Micro</div>
             <div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22)"></div><div style="height:32px;border-radius:6px;background:rgba(234,20,120,0.22);box-shadow:0 0 0 2px #fff"></div>
           </div>
@@ -295,13 +350,13 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
 
     <!-- 01-C -->
-    <div id="proj-01c" style="max-width:1300px;margin:0 auto;padding:0 60px">
+    <div id="proj-01c" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-C</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">EXPOBOR &amp; PNEUSHOW 2026</h3>
-      <div style="display:flex;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;gap:48px;align-items:center">
         <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Organização e execução da comunicação institucional para a maior feira de borracha e pneus da América Latina, com mais de 9.600 visitantes de 20 países.</p>
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Do convite VIP, à série de e-mails Arena do Conhecimento, com copy e estrutura próprias para cada palestra.</p>
@@ -315,8 +370,8 @@
             <sc-if value="{{ carousel01c.is3 }}"><img onClick="{{ carousel01c.open }}" src="assets/pneushow-linkedin-aresp.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01c.is4 }}"><img onClick="{{ carousel01c.open }}" src="assets/palestra-ricca.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01c.is5 }}"><img onClick="{{ carousel01c.open }}" src="assets/convite-vip-2.png" alt="{{ carousel01c.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
-            <button onClick="{{ carousel01c.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
-            <button onClick="{{ carousel01c.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <button onClick="{{ carousel01c.prev }}" class="pf-touch-btn" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01c.next }}" class="pf-touch-btn" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
             <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01c.counter }}</div>
           </div>
           <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
@@ -329,13 +384,13 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
 
     <!-- 01-D -->
-    <div id="proj-01d" style="max-width:1300px;margin:0 auto;padding:0 60px">
+    <div id="proj-01d" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-D</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Bagnare Cosméticos</h3>
-      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
         <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Atuação em comunicação e marketing digital na Bagnare Cosméticos, com foco em reposicionamento de marca e fortalecimento de presença nos canais B2C e B2B.</p>
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">O trabalho incluiu execução de campanhas em marketplaces, com estruturação de conteúdo e identidade visual alinhada ao posicionamento da marca, além de comunicação voltada a fornecedores e parceiros comerciais no eixo B2B.</p>
@@ -343,15 +398,15 @@
         </div>
         <div style="flex:1">
           
-          <div style="position: relative; width: 436px; aspect-ratio: 1/1; background: #111; border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; overflow: hidden; height: 436px; margin: 0 auto">
+          <div class="pf-carousel-fixed" style="position: relative; width: 436px; aspect-ratio: 1/1; background: #111; border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; overflow: hidden; height: 436px; margin: 0 auto">
             <sc-if value="{{ carousel01d.is0 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-consciencia-negra.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
             <sc-if value="{{ carousel01d.is1 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-lavanda.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
             <sc-if value="{{ carousel01d.is2 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-5-beneficios.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
             <sc-if value="{{ carousel01d.is3 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-bem-estar.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
             <sc-if value="{{ carousel01d.is4 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-bingo.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
             <sc-if value="{{ carousel01d.is5 }}"><img onClick="{{ carousel01d.open }}" src="assets/bagnare-proclamacao.jpg" alt="{{ carousel01d.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
-            <button onClick="{{ carousel01d.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
-            <button onClick="{{ carousel01d.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <button onClick="{{ carousel01d.prev }}" class="pf-touch-btn" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01d.next }}" class="pf-touch-btn" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
             <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01d.counter }}</div>
           </div><div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
             <sc-for list="{{ carousel01d.dots }}" as="dot" hint-placeholder-count="6">
@@ -363,13 +418,13 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
 
     <!-- 01-E -->
-    <div id="proj-01e" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+    <div id="proj-01e" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-E</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Peças institucionais</h3>
-      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
         <div style="flex:1">
           <div style="position:relative;width:100%;aspect-ratio:4/3;background:#111;border:1px solid rgba(255,255,255,0.28);border-radius:8px;overflow:hidden">
             <sc-if value="{{ carousel01e.is0 }}"><img onClick="{{ carousel01e.open }}" src="assets/lona-interna.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
@@ -378,8 +433,8 @@
             <sc-if value="{{ carousel01e.is3 }}"><img onClick="{{ carousel01e.open }}" src="assets/header-reuniao-abrafiltros.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01e.is4 }}"><img onClick="{{ carousel01e.open }}" src="assets/info086-face-insta.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01e.is5 }}"><img onClick="{{ carousel01e.open }}" src="assets/header.png" alt="{{ carousel01e.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
-            <button onClick="{{ carousel01e.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
-            <button onClick="{{ carousel01e.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <button onClick="{{ carousel01e.prev }}" class="pf-touch-btn" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01e.next }}" class="pf-touch-btn" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
             <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01e.counter }}</div>
           </div>
           <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
@@ -397,13 +452,13 @@
     </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
 
     <!-- 01-F -->
-    <div id="proj-01f" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+    <div id="proj-01f" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
       <div style="color:{{ titleColor }};font-size:20px;font-weight:600;margin-bottom:4px">Projeto 01-F</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Identidade Visual AbiarbConecta</h3>
-      <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
         <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Desenvolvimento do manual de identidade visual completo do AbiarbConecta, a partir do logotipo já existente da marca.</p>
           <p class="justify-pt" lang="pt-BR" style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#D9D9D9">Estruturação de toda a aplicação da marca: paleta de cores institucional e auxiliar, hierarquia tipográfica, área de proteção e escala mínima de redução, além das versões monocromáticas (positiva, negativa e em cinza) para uso em diferentes fundos.</p>
@@ -414,8 +469,8 @@
             <sc-if value="{{ carousel01f.is0 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-contraste-cores.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01f.is1 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-monocromatico.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
             <sc-if value="{{ carousel01f.is2 }}"><img onClick="{{ carousel01f.open }}" src="assets/abiarbconecta-area-protecao.png" alt="{{ carousel01f.alt }}" style="cursor:pointer;position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></sc-if>
-            <button onClick="{{ carousel01f.prev }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
-            <button onClick="{{ carousel01f.next }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
+            <button onClick="{{ carousel01f.prev }}" class="pf-touch-btn" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">‹</button>
+            <button onClick="{{ carousel01f.next }}" class="pf-touch-btn" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:36px;height:36px;color:#F4F4F4;font-size:18px;cursor:pointer">›</button>
             <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#F4F4F4;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:10px">{{ carousel01f.counter }}</div>
           </div>
           <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
@@ -428,20 +483,20 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:0 60px 32px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px 32px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
   </div>
 
   <!-- ===== PROJETOS ACADEMICOS ===== -->
   <div id="sec-acad" data-screen-label="Projetos Acadêmicos" style="width:100%;position:relative">
-    <div style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Acadêmicos</h2>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:56px 60px 40px">
+      <h2 class="pf-title1" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0">Projetos</h2>
+      <h2 class="pf-title2" style="font-family:'Playfair Display',serif;font-weight:700;color:{{ titleColor }};font-size:64px;line-height:1.1;margin:0 0 0 220px">Acadêmicos</h2>
     </div>
 
     <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
 
     <!-- 02-A -->
-    <div id="proj-02a" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
+    <div id="proj-02a" class="pf-px" style="max-width:1300px;margin:0 auto;padding:56px 60px 0">
       <div style="color: {{ titleColor }}; font-size: 20px; font-weight: 600; margin-bottom: 4px; font-family: Poppins">Projeto 02-A</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Iniciação Científica: Framing e Narrativa</h3>
       <div style="max-width:760px;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
@@ -451,13 +506,13 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div></div>
 
     <!-- 02-B -->
-    <div id="proj-02b" style="max-width:1300px;margin:0 auto;padding:0 60px">
+    <div id="proj-02b" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px">
       <div style="color:{{ titleColor }};font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;margin-bottom:4px">Projeto 02-B</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Agência Araraúna</h3>
-      <div style="display:flex;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;gap:48px;align-items:center">
         <div style="flex:1.2;position:relative;padding:22px 24px" style-before="content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1px solid #F4F4F4;border-left:1px solid #F4F4F4" style-after="content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1px solid #F4F4F4;border-right:1px solid #F4F4F4">
           <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Projeto em grupo desenvolvido na disciplina Técnicas de Relações Públicas (trabalho semestral), com criação da agência Araraúna: identidade visual, organograma e portfólio de serviços (diagnóstico de comunicação, mídias sociais, comunicação interna, eventos, gestão de crise, marketing de influência e pesquisa).</p>
           <p class="justify-pt" lang="pt-BR" style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #D9D9D9; font-family: Poppins">Como aplicação prática, de forma pro-bono, atendemos o Resort Éden Sand: o briefing apontou desafios de restauração de confiança e pós-crise. Estruturamos três frentes de ação, previmos mensuração por pesquisas de reputação e comunicação e modelo de fee mensal variável, evidenciando o papel estratégico de RP na revitalização da marca.</p>
@@ -470,13 +525,13 @@
       </div>
     </div>
 
-    <div style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
+    <div class="pf-px" style="max-width:1300px;margin:0 auto;padding:64px 60px 24px;display:flex;align-items:center;gap:0"><div style="flex:1;height:2px;background:{{ accentColor }};opacity:0.45"></div><div style="width:64px;height:64px;background:{{ accentColor }};flex:none"></div></div>
 
     <!-- 02-C -->
-    <div id="proj-02c" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
+    <div id="proj-02c" class="pf-px" style="max-width:1300px;margin:0 auto;padding:0 60px 64px">
       <div style="color:{{ titleColor }};font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;margin-bottom:4px">Projeto 02-C</div>
       <h3 style="font-family:'Poppins',sans-serif;font-weight:700;color:{{ titleColor }};font-size:32px;margin:0 0 28px">Araraúna X Bagnare</h3>
-      <div style="display:flex;gap:48px;align-items:center">
+      <div class="pf-proj-row" style="display:flex;gap:48px;align-items:center">
         <div style="flex:1;display:flex;flex-direction:column;gap:16px">
           <div style="border: 1px solid rgba(255,255,255,0.28); border-radius: 16px; padding: 8px; aspect-ratio: 13/10; overflow: hidden"><img src="assets/ararauna-bagnare-combo.png" alt="Identidade Araraúna e produtos Bagnare" style="width:100%;height:100%;object-fit:cover;border-radius:8px;display:block"></div>
           <p style="text-align:center;margin:0;font-family:'Poppins',sans-serif"><span style="display:block;font-weight:700;font-size:14px;color:#FFFFFF">Araraúna x Bagnare</span><span style="display:block;font-weight:400;font-size:14px;color:#FFFFFF;margin-top:4px">Reposicionamento digital da marca</span><span style="display:block;font-style:italic;font-size:12.5px;color:#FFFFFF;margin-top:4px">Ao olharmos a marca, enxergamos seu potencial de alcance</span></p>
@@ -494,9 +549,9 @@
   <div style="width:100%;height:14px;background:{{ accentColor }}"></div>
 
   <!-- FOOTER -->
-  <div id="sec-footer" style="max-width:1300px;margin:0 auto;padding:56px 60px 12px;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center">
-    <div style="display:flex;align-items:center;gap:18px">
-      <div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
+  <div id="sec-footer" class="pf-px" style="max-width:1300px;margin:0 auto;padding:56px 60px 12px;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center">
+    <div class="pf-icon-row" style="display:flex;align-items:center;gap:18px">
+      <div class="pf-icon-72" style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none">
         <svg viewBox="0 0 100 100" width="72" height="72">
           <rect x="8" y="8" width="84" height="84" fill="none" stroke="{{ accentColor }}" stroke-width="3.5"></rect>
           <path d="M28 66 L50 20 L72 66" fill="none" stroke="{{ accentColor }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
@@ -504,10 +559,10 @@
           <path d="M50 40 L55 60 L70 65 L55 70 L50 90 L45 70 L30 65 L45 60 Z" fill="#ffffff"></path>
         </svg>
       </div>
-      <div style="color:{{ accentColor }};font-family:'Poppins',sans-serif;font-weight:600;font-size:26px;line-height:1.3;text-align:left">Integridade e<br>Honestidade.</div>
+      <div class="pf-badge-text" style="color:{{ accentColor }};font-family:'Poppins',sans-serif;font-weight:600;font-size:26px;line-height:1.3;text-align:left">Integridade e<br>Honestidade.</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;font-family:'Poppins',sans-serif;font-size:16px;color:{{ accentColor }}">
-      <div>(11) 94645-8744</div>
+      <div><a href="tel:+5511946458744" style="color:{{ accentColor }};text-decoration:none">(11) 94645-8744</a></div>
       <div><a href="https://linkedin.com/in/gabrielarouche-rp" target="_blank" rel="noopener" style="color:{{ accentColor }};text-decoration:none;display:inline-flex;align-items:center;gap:4px">linkedin.com/in/gabrielarouche-rp<span style="font-size:13px">↗</span></a></div>
       <div><a href="mailto:gabrielarouche.ta@gmail.com" style="color:{{ accentColor }};text-decoration:none;display:inline-flex;align-items:center;gap:4px">gabrielarouche.ta@gmail.com</a></div>
     </div>
@@ -518,7 +573,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#EA1478&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;titleColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9FE3DA&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { active: 'sec-home', activeProj: null, railOpen: false, lightbox: { open: false, group: null, index: 0 }, carousel: { '01c': 0, '01e': 0, '01f': 0, '01d': 0 } };
+  state = { active: 'sec-home', activeProj: null, railOpen: false, navOpen: false, lightbox: { open: false, group: null, index: 0 }, carousel: { '01c': 0, '01e': 0, '01f': 0, '01d': 0 } };
 
   imagesData = {
     '01c': [
@@ -611,8 +666,10 @@ class Component extends DCLogic {
     if (!el) return;
     const y = el.getBoundingClientRect().top + window.scrollY - 64;
     window.scrollTo({ top: y, behavior: 'smooth' });
-    this.setState({ railOpen: false });
+    this.setState({ railOpen: false, navOpen: false });
   }
+
+  toggleNav() { this.setState((s) => ({ navOpen: !s.navOpen })); }
 
   renderVals() {
     const accentColor = this.props.accentColor ?? '#EA1478';
@@ -672,6 +729,8 @@ class Component extends DCLogic {
       scrollToProj02b: () => this.scrollTo('proj-02b'),
       scrollToProj02c: () => this.scrollTo('proj-02c'),
       scrollToContato: () => this.scrollTo('sec-footer'),
+      navOpen: this.state.navOpen,
+      toggleNav: () => this.toggleNav(),
       scrollToAbout: () => this.scrollTo('sec-about'),
       railContatoColor: '#F4F4F4',
       railAboutColor: '#F4F4F4',
